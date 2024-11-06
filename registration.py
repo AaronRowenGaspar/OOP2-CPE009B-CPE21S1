@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
+import csv
 
 class Registration:
     def __init__(self, win):
@@ -52,6 +53,10 @@ class Registration:
         contact_number = self.Entry6.get()
 
         if all([first_name, surname, username, password, email, contact_number]):
+            # Save data to a CSV file
+            with open('registrations.csv', 'a', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow([first_name, surname, username, password, email, contact_number])
             messagebox.showinfo("Submission Successful", "Registration Submitted Successfully!")
         else:
             messagebox.showwarning("Submission Failed", "Please fill in all fields")
@@ -63,7 +68,6 @@ class Registration:
         self.Entry4.delete(0, END)
         self.Entry5.delete(0, END)
         self.Entry6.delete(0, END)
-
 
 if __name__ == "__main__":
     window = Tk()
